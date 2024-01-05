@@ -1,0 +1,18 @@
+class Solution {
+public:
+    int countDistinct(vector<int>& nums, int k, int p) {
+        int ans = 0, i=0,j=0,cnt = 0;
+        set<vector<int>> s;
+        vector<int> v;
+        while(i<nums.size()){
+            if(nums[i]%p==0) ++cnt;
+            while(cnt>k)    if(nums[j++]%p==0)  --cnt;
+            for(int k=i++; k>=j; --k) v.push_back(nums[k]);
+            while(!v.empty()){
+                s.insert(v);
+                v.pop_back();
+            }
+        }
+        return s.size();
+    }
+};
