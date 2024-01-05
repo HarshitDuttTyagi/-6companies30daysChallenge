@@ -1,0 +1,34 @@
+class Solution {
+public:
+    unordered_map <int, int> holes;
+   int n;
+   int m;
+   int size;
+   Solution(int n_rows, int n_cols) {
+      srand(time(NULL));
+      n = n_rows;
+      m = n_cols;
+      size = n * m;
+   }
+   vector<int> flip() {
+      int id = rand() % size;
+      size--;
+      int rid = id;
+      if(holes.count(id)){
+         id = holes[id];
+      }
+      holes[rid] = holes.count(size) ? holes[size] : size;
+      return {id / m, id % m};
+   }
+   void reset() {
+      size = n * m;
+      holes.clear();
+   }
+};
+
+/**
+ * Your Solution object will be instantiated and called as such:
+ * Solution* obj = new Solution(m, n);
+ * vector<int> param_1 = obj->flip();
+ * obj->reset();
+ */
